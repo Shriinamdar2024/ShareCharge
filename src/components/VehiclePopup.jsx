@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { X } from "lucide-react";
+import vehicleBg from "../assets/animated-vehicle-bg.gif";
 
 const VehiclePopup = ({ onClose, closeSidebar }) => {
   const [vehicles, setVehicles] = useState([]);
@@ -11,6 +12,7 @@ const VehiclePopup = ({ onClose, closeSidebar }) => {
     model: "",
     registration: "",
     vin: "",
+    category: "", // <-- New field for vehicle category
   });
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -42,12 +44,12 @@ const VehiclePopup = ({ onClose, closeSidebar }) => {
   };
 
   const addVehicle = () => {
-    if (!formData.make || !formData.model || !formData.registration || !formData.vin) {
+    if (!formData.make || !formData.model || !formData.registration || !formData.vin || !formData.category) {
       alert("Please fill in all fields.");
       return;
     }
     setVehicles([...vehicles, formData]);
-    setFormData({ make: "", model: "", registration: "", vin: "" });
+    setFormData({ make: "", model: "", registration: "", vin: "", category: "" });
     setShowForm(false);
     setSelectedVehicle(null);
   };
@@ -63,9 +65,8 @@ const VehiclePopup = ({ onClose, closeSidebar }) => {
     setModelDropdownOpen(false);
   };
 
-  // Close sidebar when VehiclePopup opens
   const handleOpenPopup = () => {
-    closeSidebar(); // This closes the sidebar
+    closeSidebar();
   };
 
   return (
@@ -74,7 +75,7 @@ const VehiclePopup = ({ onClose, closeSidebar }) => {
         <button
           onClick={() => {
             onClose();
-            closeSidebar(); // Ensure sidebar closes when popup is closed
+            closeSidebar();
           }}
           className="absolute top-4 right-4 text-gray-600 hover:text-red-600 transition-all duration-300 transform hover:rotate-45"
         >
@@ -91,7 +92,7 @@ const VehiclePopup = ({ onClose, closeSidebar }) => {
             <button
               onClick={() => {
                 setShowForm(true);
-                handleOpenPopup(); // Close sidebar when popup opens
+                handleOpenPopup();
               }}
               className="px-6 py-2 bg-[#32CD32] text-white rounded-lg hover:bg-green-700 transition-transform duration-300 transform hover:scale-105"
             >
@@ -114,7 +115,7 @@ const VehiclePopup = ({ onClose, closeSidebar }) => {
             <button
               onClick={() => {
                 setShowForm(true);
-                handleOpenPopup(); // Close sidebar when popup opens
+                handleOpenPopup();
               }}
               className="w-full mt-4 px-4 py-2 bg-[#32CD32] text-white rounded-lg hover:bg-green-700 transition-transform duration-300 transform hover:scale-105"
             >
@@ -130,6 +131,7 @@ const VehiclePopup = ({ onClose, closeSidebar }) => {
             <p><strong>Model:</strong> {selectedVehicle.model}</p>
             <p><strong>Reg. Number:</strong> {selectedVehicle.registration}</p>
             <p><strong>VIN:</strong> {selectedVehicle.vin}</p>
+            <p><strong>Category:</strong> {selectedVehicle.category}</p>
             <button
               onClick={() => setSelectedVehicle(null)}
               className="mt-4 inline-block text-blue-600 underline transition-all duration-300 transform hover:scale-105"
@@ -143,6 +145,7 @@ const VehiclePopup = ({ onClose, closeSidebar }) => {
           <div className="mt-6 border-t pt-4">
             <h3 className="text-xl font-bold text-gray-700 mb-3">Add Vehicle</h3>
 
+            {/* Vehicle Make Dropdown */}
             <div className="mb-6 relative">
               <label className="block text-gray-700 font-semibold mb-2 text-lg">Choose Vehicle Make</label>
               <input
@@ -154,7 +157,7 @@ const VehiclePopup = ({ onClose, closeSidebar }) => {
                 placeholder="Select Make"
               />
               {dropdownOpen && (
-                <div className="absolute left-0 right-0 bg-white border mt-1 rounded-lg max-h-64 overflow-y-auto z-10 shadow-xl transition-all duration-300 transform scale-95 hover:scale-100 bg-gradient-to-r from-[#32CD32] to-[#32CD32]">
+                <div className="absolute left-0 right-0 bg-white border mt-1 rounded-lg max-h-64 overflow-y-auto z-10 shadow-xl transition-all duration-300 transform scale-95 hover:scale-100">
                   {makes
                     .filter((make) => make.toLowerCase().includes(formData.make.toLowerCase()))
                     .map((make) => (
@@ -174,6 +177,7 @@ const VehiclePopup = ({ onClose, closeSidebar }) => {
               )}
             </div>
 
+            {/* Vehicle Model Dropdown */}
             <div className="mb-6 relative">
               <label className="block text-gray-700 font-semibold mb-2 text-lg">Choose Vehicle Model</label>
               <input
@@ -185,7 +189,7 @@ const VehiclePopup = ({ onClose, closeSidebar }) => {
                 placeholder="Select Model"
               />
               {modelDropdownOpen && formData.make && (
-                <div className="absolute left-0 right-0 bg-white border mt-1 rounded-lg max-h-64 overflow-y-auto z-10 shadow-xl transition-all duration-300 transform scale-95 hover:scale-100 bg-gradient-to-r from-[#32CD32] to-[#32CD32]">
+                <div className="absolute left-0 right-0 bg-white border mt-1 rounded-lg max-h-64 overflow-y-auto z-10 shadow-xl transition-all duration-300 transform scale-95 hover:scale-100">
                   {models[formData.make]
                     .filter((model) => model.toLowerCase().includes(formData.model.toLowerCase()))
                     .map((model) => (
@@ -205,6 +209,7 @@ const VehiclePopup = ({ onClose, closeSidebar }) => {
               )}
             </div>
 
+            {/* Registration Number */}
             <input
               type="text"
               placeholder="Vehicle Registration Number"
@@ -213,6 +218,7 @@ const VehiclePopup = ({ onClose, closeSidebar }) => {
               className="w-full p-3 border rounded-md mb-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#32CD32] transition-all duration-300 transform hover:scale-105 shadow-lg"
             />
 
+            {/* VIN */}
             <input
               type="text"
               placeholder="Vehicle VIN"
@@ -221,11 +227,40 @@ const VehiclePopup = ({ onClose, closeSidebar }) => {
               className="w-full p-3 border rounded-md mb-6 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#32CD32] transition-all duration-300 transform hover:scale-105 shadow-lg"
             />
 
+            {/* Category Radio Buttons */}
+            <div className="mb-6">
+              <label className="block text-gray-700 font-semibold mb-2 text-lg">Select Vehicle Category</label>
+              <div className="flex space-x-6">
+                <label className="flex items-center space-x-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="category"
+                    value="Bike"
+                    checked={formData.category === "Bike"}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    className="text-green-600"
+                  />
+                  <span className="text-gray-700 font-medium">Bike</span>
+                </label>
+                <label className="flex items-center space-x-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="category"
+                    value="Car"
+                    checked={formData.category === "Car"}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    className="text-green-600"
+                  />
+                  <span className="text-gray-700 font-medium">Car</span>
+                </label>
+              </div>
+            </div>
+
             <button
               onClick={addVehicle}
-              className="w-full px-6 py-3 bg-[#32CD32] text-white rounded-lg hover:bg-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+              className="w-full px-6 py-3 bg-[#32CD32] text-white font-semibold rounded-lg hover:bg-green-700 transition-transform duration-300 transform hover:scale-105"
             >
-              Add Vehicle
+              Save Vehicle
             </button>
           </div>
         )}
