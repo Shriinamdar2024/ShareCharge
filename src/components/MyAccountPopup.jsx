@@ -43,19 +43,19 @@ const MyAccountPopup = ({ onClose }) => {
       />
 
       {/* Main Popup */}
-      <div className="relative bg-white rounded-xl shadow-2xl z-50 w-full max-w-lg p-6">
+      <div className="relative bg-white bg-opacity-60 backdrop-blur-lg rounded-xl shadow-2xl z-50 w-full max-w-lg p-4 animate__animated animate__fadeInUp">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-600 hover:text-black"
+          className="absolute top-3 right-3 text-gray-600 hover:text-black transition-all duration-300 transform hover:scale-110"
         >
           <X size={20} />
         </button>
 
-        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">My Account</h2>
+        <h2 className="text-2xl font-semibold text-center mb-4 text-gray-800">My Account</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4 text-gray-800">
           {/* Profile Photo */}
-          <div className="text-center">
+          <div className="text-center mb-4">
             <input
               type="file"
               accept="image/*"
@@ -72,9 +72,9 @@ const MyAccountPopup = ({ onClose }) => {
               <img
                 src={userInfo.profilePhoto || "https://via.placeholder.com/100"}
                 alt="Profile"
-                className="w-24 h-24 mx-auto rounded-full object-cover border shadow"
+                className="w-20 h-20 mx-auto rounded-full object-cover border-4 border-green-400 shadow-lg transition-all duration-300 transform hover:scale-110"
               />
-              <p className="text-sm text-blue-600 mt-1 hover:underline">Change Photo</p>
+              <p className="text-sm text-blue-600 mt-2 hover:underline">Change Photo</p>
             </label>
           </div>
 
@@ -85,7 +85,7 @@ const MyAccountPopup = ({ onClose }) => {
             value={userInfo.fullName}
             onChange={handleChange}
             placeholder="Full Name"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="w-full px-3 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 shadow-md transition-all duration-300 transform hover:scale-105"
             required
           />
 
@@ -96,7 +96,7 @@ const MyAccountPopup = ({ onClose }) => {
             value={userInfo.email}
             onChange={handleChange}
             placeholder="Email Address"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="w-full px-3 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 shadow-md transition-all duration-300 transform hover:scale-105"
             required
           />
 
@@ -107,7 +107,7 @@ const MyAccountPopup = ({ onClose }) => {
             value={userInfo.mobile}
             onChange={handleChange}
             placeholder="Mobile Number"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="w-full px-3 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 shadow-md transition-all duration-300 transform hover:scale-105"
             required
           />
 
@@ -118,29 +118,29 @@ const MyAccountPopup = ({ onClose }) => {
             value={userInfo.pincode}
             onChange={handleChange}
             placeholder="Pincode"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="w-full px-3 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 shadow-md transition-all duration-300 transform hover:scale-105"
             required
           />
 
           {/* Vehicle Category */}
           <div>
-            <label className="font-semibold block mb-2">Vehicle Category</label>
-            <div className="flex gap-6">
-              <label className="inline-flex items-center">
+            <label className="font-semibold block mb-2 text-gray-700">Vehicle Category</label>
+            <div className="flex gap-4">
+              <label className="inline-flex items-center transition-all duration-300 transform hover:scale-110">
                 <input
                   type="checkbox"
                   checked={userInfo.vehicleCategory.bike}
                   onChange={() => handleCheckbox("bike")}
-                  className="mr-2"
+                  className="mr-2 transition-all duration-300 transform hover:scale-110"
                 />
                 Bike
               </label>
-              <label className="inline-flex items-center">
+              <label className="inline-flex items-center transition-all duration-300 transform hover:scale-110">
                 <input
                   type="checkbox"
                   checked={userInfo.vehicleCategory.car}
                   onChange={() => handleCheckbox("car")}
-                  className="mr-2"
+                  className="mr-2 transition-all duration-300 transform hover:scale-110"
                 />
                 Car
               </label>
@@ -150,7 +150,7 @@ const MyAccountPopup = ({ onClose }) => {
           {/* Save Button */}
           <button
             type="submit"
-            className="w-full bg-[#32CD32] hover:bg-green-600 text-white font-semibold py-2 rounded-lg transition"
+            className="w-full bg-[#32CD32] hover:bg-green-600 text-white font-semibold py-2 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-110"
           >
             Save Changes
           </button>

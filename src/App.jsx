@@ -9,7 +9,7 @@ import PaymentPopup from "./components/PaymentPopup";
 import Footer from "./components/Footer";
 import MyAccountPopup from "./components/MyAccountPopup";
 import BackgroundDesign from "./components/BackgroundDesign";
-
+import VehiclePopup from "./components/VehiclePopup";
 import HomeSlider from "./components/HomeSlider";
 
 
@@ -29,7 +29,7 @@ function App() {
         <Route path="/payment" element={<PaymentPopup />} />
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Home />} />
-        
+        <Route path="/vehicle" element={<VehiclePopup />} />
       </Routes>
       <Footer />
     </Router>

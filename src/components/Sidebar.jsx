@@ -1,11 +1,25 @@
 // components/Sidebar.jsx
+import { useState } from "react";
 import { X, UserCircle, History, Car, HelpCircle, CalendarCheck, Receipt, LogOut, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
+import VehiclePopup from "./VehiclePopup"; // Make sure the path is correct
 
 const Sidebar = ({ isOpen, onClose, openAccount }) => {
+  const [isVehiclePopupOpen, setIsVehiclePopupOpen] = useState(false);
+
   const user = {
     name: "Shrirup Inamdar",
     profileImage: "/images/shriiiii.jpg",
+  };
+
+  // Function to open the vehicle popup
+  const openVehiclePopup = () => {
+    setIsVehiclePopupOpen(true);
+  };
+
+  // Function to close the vehicle popup
+  const closeVehiclePopup = () => {
+    setIsVehiclePopupOpen(false);
   };
 
   return (
@@ -29,7 +43,15 @@ const Sidebar = ({ isOpen, onClose, openAccount }) => {
           </button>
 
           <SidebarItem to="/history" icon={<History size={18} />} label="Charging History" />
-          <SidebarItem to="/vehicle" icon={<Car size={18} />} label="My Vehicle" />
+
+          <button
+            onClick={openVehiclePopup}  // Trigger to open vehicle popup
+            className="flex items-center space-x-3 text-gray-700 hover:text-[#32CD32] transition w-full"
+          >
+            <Car size={18} />
+            <span>My Vehicle</span>
+          </button>
+
           <SidebarItem to="/support" icon={<HelpCircle size={18} />} label="Help & Support" />
           <SidebarItem to="/bookings" icon={<CalendarCheck size={18} />} label="My Bookings" />
           <SidebarItem to="/transactions" icon={<Receipt size={18} />} label="My Transactions" />
@@ -40,6 +62,10 @@ const Sidebar = ({ isOpen, onClose, openAccount }) => {
       </div>
 
       {isOpen && <div className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm z-40" onClick={onClose}></div>}
+
+      {isVehiclePopupOpen && (
+        <VehiclePopup onClose={closeVehiclePopup} />
+      )}
     </>
   );
 };
