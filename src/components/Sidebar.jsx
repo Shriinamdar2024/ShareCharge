@@ -53,7 +53,7 @@ const Sidebar = ({ isOpen, onClose, openAccount }) => {
           </button>
 
           <SidebarItem to="/support" icon={<HelpCircle size={18} />} label="Help & Support" />
-          <SidebarItem to="/bookings" icon={<CalendarCheck size={18} />} label="My Bookings" />
+          <SidebarItem to="/allBookingsDetail" icon={<CalendarCheck size={18} />} label="My Bookings" />
           <SidebarItem to="/transactions" icon={<Receipt size={18} />} label="My Transactions" />
           <hr className="border-t border-gray-300" />
           <SidebarItem to="/signin" icon={<ShieldCheck size={18} />} label="Sign In" />

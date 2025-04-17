@@ -1,22 +1,48 @@
-// components/Navbar.jsx
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Wallet, LogIn, User } from "lucide-react";
 import WalletPopup from "./WalletPopup";
 import MyAccountPopup from "./MyAccountPopup";
 import Sidebar from "./Sidebar";
+import { checkSession,logout } from "../auth/user"; // 👈 import session checker
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isWalletOpen, setIsWalletOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMyAccountOpen, setIsMyAccountOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 👈 state to track login
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // 👇 Check if user is logged in
+  useEffect(() => {
+    const verify = async () => {
+      // console.log("verify in navbar");
+      try {
+        const status = await checkSession();
+        setIsLoggedIn(status);
+        console.log(status,"status in navbar");
+      } catch (err) {
+        console.error("Session check failed");
+      }
+    };
+
+    verify();
+  }, []);
+
+  // 👇 Logout handler
+  const handleLogout = async () => {
+    await logout();
+    setIsLoggedIn(false);
+    navigate("/login");
+  };
 
   return (
     <>
@@ -30,15 +56,27 @@ const Navbar = () => {
             <Link to="/home" className="text-white hover:text-black transition">Home</Link>
             <Link to="/about" className="text-white hover:text-black transition">About</Link>
             <Link to="/contact" className="text-white hover:text-black transition">Contact</Link>
+
+            {/* 👇 Show Logout if logged in, else Signup */}
+            {isLoggedIn ? (
+              <button onClick={handleLogout} className="text-white hover:text-black transition">Logout</button>
+            ) : (
+              <Link to="/signup" className="text-white hover:text-black transition">Signup</Link>
+            )}
           </div>
 
           <div className="flex space-x-4 text-white">
             <button onClick={() => setIsWalletOpen(true)} className="hover:text-black transition">
               <Wallet size={24} />
             </button>
-            <Link to="/login" className="hover:text-black transition">
-              <LogIn size={24} />
-            </Link>
+
+            {/* Login icon shown only if not logged in */}
+            {!isLoggedIn && (
+              <Link to="/login" className="hover:text-black transition">
+                <LogIn size={24} />
+              </Link>
+            )}
+
             <button onClick={() => setIsSidebarOpen(true)} className="hover:text-black transition">
               <User size={24} />
             </button>
@@ -46,6 +84,7 @@ const Navbar = () => {
         </div>
       </nav>
 
+      {/* Popups */}
       {isWalletOpen && <WalletPopup closeWallet={() => setIsWalletOpen(false)} />}
       {isMyAccountOpen && <MyAccountPopup onClose={() => setIsMyAccountOpen(false)} />}
       <Sidebar
