@@ -55,7 +55,6 @@ const Navbar = () => {
           <div className="hidden md:flex space-x-6">
             <Link to="/home" className="text-white hover:text-black transition">Home</Link>
             <Link to="/about" className="text-white hover:text-black transition">About</Link>
-            <Link to="/contact" className="text-white hover:text-black transition">Contact</Link>
 
             {/* 👇 Show Logout if logged in, else Signup */}
             {isLoggedIn ? (

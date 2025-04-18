@@ -129,7 +129,7 @@ const MyAccountPopup = ({ onClose }) => {
               <label className="inline-flex items-center transition-all duration-300 transform hover:scale-110">
                 <input
                   type="checkbox"
-                  checked={userInfo.vehicleCategory.bike}
+                  checked={           userInfo.vehicleCategory.bike}
                   onChange={() => handleCheckbox("bike")}
                   className="mr-2 transition-all duration-300 transform hover:scale-110"
                 />

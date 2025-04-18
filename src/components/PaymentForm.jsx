@@ -33,7 +33,7 @@ const PaymentForm = ({ closePayment }) => {
 
       setTimeout(() => {
         closePayment(); // ✅ Close Payment Popup
-        navigate("/wallet"); // ✅ Redirect to Wallet after success
+        //navigate("/WalletPopup"); // ✅ Redirect to Wallet after success
       }, 1500);
     }, 3000);
   };

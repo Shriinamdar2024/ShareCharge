@@ -21,7 +21,8 @@ const VehiclePopup = ({ onClose, closeSidebar }) => {
   const makes = [
     "Tata.Ev", "Hyundai.Ev", "Tesla", "Volkswagen", "Ford", "BMW",
     "Kia", "Nissan", "Mercedes", "Audi", "MG", "Volvo", "Jaguar", "Porsche",
-    "Mahindra", "BYD",
+    "Mahindra", "BYD","Ola", "Ather", "TVS iQube", "Revolt Motors", "Hero Electric Optima",
+    "Bajaj Chetak", 
   ];
 
   const models = {
@@ -40,7 +41,15 @@ const VehiclePopup = ({ onClose, closeSidebar }) => {
     "Jaguar": ["Jaguar I-Pace"],
     "Porsche": ["Porsche Taycan", "Porsche Taycan Cross Turismo"],
     "Mahindra": ["Mahindra e2o Plus", "Mahindra XUV400"],
-    "BYD": ["BYD Tang EV", "BYD Atto 3"],
+    "BYD": ["BYD Atto 3", "BYD Tang EV"], 
+    "Ola": ["Ola S1 Pro", "Ola S1 Air","Ola S1 X","Ola S1 X+","Ola S1 Z","Ola S1 Pro Plus"],
+    "Ather": ["Ather 450X", "Ather 450S", "Ather 450 Apex"],
+    "TVS iQube": ["TVS iQube", "TVS iQube S", "TVS iQube ST"],
+    "Revolt Motors": ["Revolt RV400", "Revolt RV300"],
+    "Hero Electric Optima": ["Hero Electric Optima CX", "Hero Electric NYX", "Hero Electric Photon", "Hero Electric Atria", "Hero Electric Flash"],
+    "Bajaj Chetak": ["Bajaj Chetak Premium", "Bajaj Chetak Urbane"],
+
+
   };
 
   const addVehicle = () => {

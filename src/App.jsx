@@ -3,7 +3,6 @@ import "./index.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
-import Wallet from "./components/wallet";
 import PaymentForm from "./components/PaymentForm";
 import AboutUs from "./components/AboutUs";
 import PaymentPopup from "./components/PaymentPopup"; 
@@ -14,13 +13,17 @@ import VehiclePopup from "./components/VehiclePopup";
 import HomeSlider from "./components/HomeSlider";
 import Signup from "./components/singup";
 import Login from "./components/login";
-import AllBookingsDetail from "./components/allBookingsDetail";
+import WalletPopup from "./components/WalletPopup";
+import ChargingHistoryPopup from "./components/ChargingHistoryPopup"; // adjust path as needed
+import MyBookings from "./components/MyBookings";
+import HelpAndSupport from "./components/Help&Support";
+import MyTransactions from "./components/MyTransactions";
 function App() {
   return (
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/wallet" element={<Wallet />} />
+      <Route path="/history" element={<ChargingHistoryPopup />} />
         <Route path="/payment" element={<PaymentForm />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/payment-popup" element={<PaymentPopup />} />
@@ -29,7 +32,12 @@ function App() {
         <Route path="/vehicle" element={<VehiclePopup />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/allBookingsDetail" element={<AllBookingsDetail />} />
+        <Route path="/MyBookings" element={<MyBookings/>} />
+        <Route path="/Help&Support" element={<HelpAndSupport/>} />
+        <Route path="/MyTransactions" element={<MyTransactions/>} />
+
+
+
       </Routes>
       <Footer />
     </Router>
