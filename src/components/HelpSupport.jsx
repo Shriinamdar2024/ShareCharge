@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { X } from "lucide-react";
 import "animate.css";
 
-const HelpAndSupport = ({ closePopup }) => {
+const HelpSupport = ({ closePopup }) => {
   const [showContactOptions, setShowContactOptions] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -11,7 +11,7 @@ const HelpAndSupport = ({ closePopup }) => {
       alert("Please enter a message before sending.");
       return;
     }
-    const mailtoLink = `mailto:support@sharecharge.com?subject=Customer%20Support%20Query&body=${encodeURIComponent(
+    const mailtoLink = `mailto:shriinamdar88@gmail.com?subject=Customer%20Support%20Query&body=${encodeURIComponent(
       message
     )}`;
     window.location.href = mailtoLink;
@@ -103,4 +103,4 @@ const HelpAndSupport = ({ closePopup }) => {
   );
 };
 
-export default HelpAndSupport;
+export default HelpSupport;

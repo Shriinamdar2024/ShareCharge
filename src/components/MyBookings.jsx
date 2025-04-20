@@ -6,18 +6,19 @@ import "animate.css";
 const MyBookings = ({ closeBookings }) => {
   const [activeTab, setActiveTab] = useState("upcoming");
 
-  const noBookingsImg = "/images/nobookings.png"; // Make sure this path is valid
+  const noBookingsImg = "/images/nobookings.png";
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Transparent and blurred overlay */}
-      <div
-        className="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-sm"
-        onClick={closeBookings}
-      ></div>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center"
+      onClick={closeBookings} // ✅ This will capture background clicks
+    >
+      <div className="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-sm"></div>
 
-      {/* Main Booking Popup */}
-      <div className="relative bg-white bg-opacity-60 backdrop-blur-lg rounded-xl shadow-2xl z-50 w-full max-w-lg p-6 animate__animated animate__fadeInUp">
+      <div
+        className="relative bg-white bg-opacity-60 backdrop-blur-lg rounded-xl shadow-2xl z-50 w-full max-w-lg p-6 animate__animated animate__fadeInUp"
+        onClick={(e) => e.stopPropagation()} // ✅ Prevents clicks inside from closing
+      >
         {/* Close Button */}
         <button
           onClick={closeBookings}

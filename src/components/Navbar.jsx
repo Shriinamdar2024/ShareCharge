@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Wallet, LogIn, User } from "lucide-react";
+import { Wallet, LogIn, User, Crown } from "lucide-react";
 import WalletPopup from "./WalletPopup";
 import MyAccountPopup from "./MyAccountPopup";
 import Sidebar from "./Sidebar";
-import { checkSession,logout } from "../auth/user"; // 👈 import session checker
+import { checkSession, logout } from "../auth/user"; // 👈 import session checker
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMyAccountOpen, setIsMyAccountOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 👈 state to track login
+  const [isPremium, setIsPremium] = useState(false); // New state for premium status
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -29,6 +31,9 @@ const Navbar = () => {
         const status = await checkSession();
         setIsLoggedIn(status);
         console.log(status,"status in navbar");
+        // Check premium status from localStorage or your backend
+        const premiumStatus = localStorage.getItem('isPremium') === 'true';
+        setIsPremium(premiumStatus);
       } catch (err) {
         console.error("Session check failed");
       }
@@ -41,7 +46,14 @@ const Navbar = () => {
   const handleLogout = async () => {
     await logout();
     setIsLoggedIn(false);
+    setIsPremium(false);
     navigate("/login");
+  };
+
+  // Function to update premium status
+  const handlePremiumUpdate = () => {
+    setIsPremium(true);
+    localStorage.setItem('isPremium', 'true');
   };
 
   return (
@@ -76,9 +88,58 @@ const Navbar = () => {
               </Link>
             )}
 
-            <button onClick={() => setIsSidebarOpen(true)} className="hover:text-black transition">
-              <User size={24} />
-            </button>
+            <motion.button 
+              onClick={() => setIsSidebarOpen(true)} 
+              className="hover:text-black transition relative"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {isPremium ? (
+                <div className="relative group">
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 10 }}
+                    className="relative"
+                  >
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity"></div>
+                      <User size={24} className="relative text-yellow-500 group-hover:text-yellow-400 transition-colors" />
+                    </div>
+                    <motion.div
+                      className="absolute inset-0 rounded-full"
+                      animate={{
+                        boxShadow: [
+                          "0 0 0 0 rgba(255, 215, 0, 0.4)",
+                          "0 0 0 4px rgba(255, 215, 0, 0.4)",
+                          "0 0 0 8px rgba(255, 215, 0, 0.2)",
+                          "0 0 0 0 rgba(255, 215, 0, 0.4)"
+                        ]
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                    <motion.div
+                      className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-yellow-500"
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        opacity: [0.8, 1, 0.8]
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                  </motion.div>
+                </div>
+              ) : (
+                <User size={24} />
+              )}
+            </motion.button>
           </div>
         </div>
       </nav>
@@ -93,6 +154,8 @@ const Navbar = () => {
           setIsMyAccountOpen(true);
           setIsSidebarOpen(false);
         }}
+        isPremium={isPremium}
+        onPremiumUpdate={handlePremiumUpdate}
       />
     </>
   );

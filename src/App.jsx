@@ -16,14 +16,17 @@ import Login from "./components/login";
 import WalletPopup from "./components/WalletPopup";
 import ChargingHistoryPopup from "./components/ChargingHistoryPopup"; // adjust path as needed
 import MyBookings from "./components/MyBookings";
-import HelpAndSupport from "./components/Help&Support";
+import HelpSupport from "./components/HelpSupport";
 import MyTransactions from "./components/MyTransactions";
+import CongratulationsPopup from "./components/CongratulationsPopup";
+import ChargingProcess from './components/ChargingProcess';
+
 function App() {
   return (
     <Router>
       <Navbar />
       <Routes>
-      <Route path="/history" element={<ChargingHistoryPopup />} />
+        <Route path="/history" element={<ChargingHistoryPopup />} />
         <Route path="/payment" element={<PaymentForm />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/payment-popup" element={<PaymentPopup />} />
@@ -33,11 +36,9 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/MyBookings" element={<MyBookings/>} />
-        <Route path="/Help&Support" element={<HelpAndSupport/>} />
+        <Route path="/HelpSupport" element={<HelpSupport/>} />
         <Route path="/MyTransactions" element={<MyTransactions/>} />
-
-
-
+        <Route path="/charging-process" element={<ChargingProcess />} />
       </Routes>
       <Footer />
     </Router>
