@@ -26,7 +26,7 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/history" element={<ChargingHistoryPopup />} />
+      <Route path="/history" element={<ChargingHistoryPopup />} />
         <Route path="/payment" element={<PaymentForm />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/payment-popup" element={<PaymentPopup />} />
@@ -38,7 +38,9 @@ function App() {
         <Route path="/MyBookings" element={<MyBookings/>} />
         <Route path="/HelpSupport" element={<HelpSupport/>} />
         <Route path="/MyTransactions" element={<MyTransactions/>} />
-        <Route path="/charging-process" element={<ChargingProcess />} />
+
+
+
       </Routes>
       <Footer />
     </Router>

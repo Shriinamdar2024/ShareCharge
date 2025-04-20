@@ -187,6 +187,10 @@ const ChargingProcess = ({ onClose }) => {
   const handleCloseForm = () => {
     setShowChargingForm(false);
     setShowPreBookForm(false);
+    setSelectedSlot(null);
+    setChargingTime(1);
+    setChargingPercentage(50);
+    setChargingType(null);
   };
 
   const handleStartCharging = () => {
@@ -454,42 +458,18 @@ const ChargingProcess = ({ onClose }) => {
               <div className="p-6">
                 {/* Form Header */}
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-2xl font-bold text-gray-900">Start Charging</h2>
+                  <h2 className="text-2xl font-semibold text-gray-800">Start Charging</h2>
                   <button
                     onClick={handleCloseForm}
-                    className="text-gray-600 hover:text-gray-900"
+                    className="text-gray-500 hover:text-gray-700"
                   >
                     <X size={24} />
                   </button>
                 </div>
 
-                {/* EV Selection */}
-                <div className="mb-8">
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">Select Your EV</h3>
-                  <div className="space-y-3">
-                    {userEVs.map((ev) => (
-                      <div
-                        key={ev.id}
-                        onClick={() => setSelectedEV(ev)}
-                        className={`p-4 border-2 rounded-lg cursor-pointer transition-colors ${
-                          selectedEV.id === ev.id
-                            ? 'border-[#32CD32] bg-green-50'
-                            : 'border-gray-200 hover:border-[#32CD32]'
-                        }`}
-                      >
-                        <div className="flex justify-between items-center">
-                          <span className="font-bold text-gray-900">{ev.name}</span>
-                          <span className="text-sm font-medium text-gray-700">{ev.battery}</span>
-                        </div>
-                        <p className="text-sm font-medium text-gray-700 mt-1">Range: {ev.range}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
                 {/* Charging Type Selection */}
                 <div className="mb-8">
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">Select Charging Type</h3>
+                  <h3 className="text-lg font-medium text-gray-800 mb-4">Select Charging Type</h3>
                   <div className="grid grid-cols-2 gap-4">
                     <button
                       onClick={() => handleChargingTypeSelect('time')}
@@ -501,8 +481,8 @@ const ChargingProcess = ({ onClose }) => {
                     >
                       <div className="flex flex-col items-center">
                         <Clock size={24} className="mb-2" />
-                        <span className="font-bold text-gray-900">Fixed Time</span>
-                        <span className="text-sm font-medium text-gray-700">Charge for specific duration</span>
+                        <span className="font-medium">Fixed Time</span>
+                        <span className="text-sm text-gray-500">Charge for specific duration</span>
                       </div>
                     </button>
                     
@@ -516,8 +496,8 @@ const ChargingProcess = ({ onClose }) => {
                     >
                       <div className="flex flex-col items-center">
                         <Battery size={24} className="mb-2" />
-                        <span className="font-bold text-gray-900">Fixed Percentage</span>
-                        <span className="text-sm font-medium text-gray-700">Charge to specific level</span>
+                        <span className="font-medium">Fixed Percentage</span>
+                        <span className="text-sm text-gray-500">Charge to specific level</span>
                       </div>
                     </button>
                   </div>
@@ -684,41 +664,18 @@ const ChargingProcess = ({ onClose }) => {
               <div className="p-6">
                 <div className="flex justify-between items-center mb-6">
                   <div className="flex items-center space-x-3">
-                    <h2 className="text-2xl font-bold text-gray-900">Pre-book Charging</h2>
+                    <h2 className="text-2xl font-semibold text-gray-800">Pre-book Charging</h2>
                     <div className="flex items-center space-x-1 bg-yellow-100 px-2 py-1 rounded-full">
-                      <Crown size={16} className="text-yellow-600" />
-                      <span className="text-xs font-bold text-yellow-700">Premium</span>
+                      <Crown size={16} className="text-yellow-500" />
+                      <span className="text-xs font-medium text-yellow-700">Premium</span>
                     </div>
                   </div>
                   <button
                     onClick={handleCloseForm}
-                    className="text-gray-600 hover:text-gray-900"
+                    className="text-gray-500 hover:text-gray-700"
                   >
                     <X size={24} />
                   </button>
-                </div>
-
-                {/* Time Slot Selection */}
-                <div className="mb-8">
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">Select Time Slot</h3>
-                  <div className="grid grid-cols-3 gap-3">
-                    {timeSlots.map((slot) => (
-                      <button
-                        key={slot.time}
-                        onClick={() => setSelectedSlot(slot.time)}
-                        disabled={!slot.available}
-                        className={`p-3 border-2 rounded-lg text-center transition-colors ${
-                          selectedSlot === slot.time
-                            ? 'border-[#32CD32] bg-green-50 text-[#32CD32] font-bold'
-                            : slot.available
-                              ? 'border-gray-200 hover:border-[#32CD32] text-gray-900'
-                              : 'border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed'
-                        }`}
-                      >
-                        <span className="text-sm font-bold">{slot.time}</span>
-                      </button>
-                    ))}
-                  </div>
                 </div>
 
                 {/* EV Selection */}

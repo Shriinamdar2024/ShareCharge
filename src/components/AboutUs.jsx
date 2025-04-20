@@ -38,8 +38,9 @@ const AboutUs = () => {
           <div className="md:w-1/2 space-y-1">
             <h2 className="text-xl md:text-2xl font-semibold">Our Vision 🌿</h2>
             <p className="text-gray-700 text-sm md:text-base leading-snug">
-              Revolutionizing EV charging by making it <strong>seamless, accessible, and eco-friendly</strong>. Our platform helps you <strong>find, book, and pay</strong> with ease.
-            </p>
+            At ShareCharge, we envision a world where electric vehicle charging is no longer a hassle, but a seamless part of your journey. We're committed to revolutionizing the EV charging experience by making it more accessible, user-friendly, and environmentally conscious. Through our smart platform, users can effortlessly locate charging stations, reserve time slots, and complete payments — all in just a few taps. Our goal is to empower EV owners with the convenience they deserve while contributing to a cleaner, greener planet.
+
+</p>
           </div>
           <img
             src="/images/EV2.jpg"
@@ -64,8 +65,7 @@ const AboutUs = () => {
           <div className="md:w-1/2 space-y-1">
             <h2 className="text-xl md:text-2xl font-semibold">Unified Charging Network 🔌</h2>
             <p className="text-gray-700 text-sm md:text-base leading-snug">
-              Whether it's Shell, HP, or Tata — we've integrated all networks to let you roam freely without app-switching chaos.
-            </p>
+            Imagine a world where every EV charging station — be it Shell, HP, Tata, or any other provider — is part of one powerful network. That’s the reality with ShareCharge. We've unified multiple charging providers under one seamless platform, eliminating the need to juggle between different apps. No more switching, no more stress — just smooth, uninterrupted charging wherever your journey takes you.            </p>
           </div>
         </motion.div>
 
